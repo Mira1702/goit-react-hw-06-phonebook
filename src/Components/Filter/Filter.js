@@ -1,41 +1,33 @@
 import React from 'react';
-import { useState } from "react";
 import { connect } from "react-redux";
-import contactsActions from '../../Redux/Contacts/actions';
+import * as actions from '../../Redux/Contacts/actions';
 
-const Filter = ({ filterContact }) => {
-  const [filterQuery, setQuery] = useState("");
-
-  const handleChange = (event) => {
-    setQuery(event.currentTarget.value);
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    filterContact(String(filterQuery));
-  };
+const Filter = ({ value, onChange }) => {  
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <h3>Find contacts by name</h3>
-          <input        
-            type="text"
-            placeholder="Search contact"
-            name="filter"
-            value={filterQuery}
-            onChange={handleChange}
-          ></input>
-        </label>
-      </form>      
-    </>
+    <div>
+      <h3>Find contacts by name</h3>
+      <input        
+        type="text"
+        placeholder="Search contact"
+        name="filter"
+        value={value}
+        onChange={onChange}
+      />
+    </div>
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts.contacts,
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
-  onChange: ({ value, onChange }) => dispatch(contactsActions.filterContact({ value, onChange }))
+  onChange: event => dispatch(actions.filterContact(event.target.value))
 })
 
-export default connect(null, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 
 // const Filter = ({ value, onChange }) => {  

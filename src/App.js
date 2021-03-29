@@ -2,6 +2,7 @@ import React from 'react';
 import PhoneBook from './Components/PhoneBook/PhoneBook';
 import Contacts from './Components/Contacts/Contacts';
 import Filter from './Components/Filter/Filter';
+import { connect } from 'react-redux';
 
 // class App extends Component {
 //   state = {
@@ -103,4 +104,8 @@ function App() {
   )
 }
 
-export default App;
+const mapStateToProps = ({ contacts: { items } }) => ({
+  contacts: items,
+});
+
+export default connect(mapStateToProps, null)(App);

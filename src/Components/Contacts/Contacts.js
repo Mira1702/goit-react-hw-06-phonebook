@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import contactsActions from '../../Redux/Contacts/actions';
+import * as actions from '../../Redux/Contacts/actions';
 
 const ContactItem = ({ id, name, number, onRemove }) => {  
   return (
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onRemove: (id) => dispatch(contactsActions.deleteContact(id))
+  onRemove: (id) => dispatch(actions.deleteContact(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

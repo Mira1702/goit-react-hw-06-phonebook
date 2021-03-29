@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 import styles from './PhoneBook.module.css';
-import contactsActions from '../../Redux/Contacts/actions';
+import * as actions from '../../Redux/Contacts/actions';
 
 
 class PhoneBook extends Component  {
@@ -64,16 +64,20 @@ class PhoneBook extends Component  {
     }
 
     inContacts = (newName) => {
-        let pass = true;
+        let pass = true;        
 
         this.state.contacts.forEach(({ name }) => {
             if (name.toLowerCase() === newName.toLowerCase()) {
                 alert(`${name} is already in your contacts list`);
                 pass = false;
-            }
+            }           
         });            
-            return pass;
+        return pass;
+        
     }
+
+    
+    
 
     // inContacts = this.state.contacts.find(
     //         item => item.name === contact.name,
@@ -124,7 +128,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: ({ id, name, number  }) => dispatch(contactsActions.addContact({ id, name, number }))
+    onSubmit: ({ id, name, number  }) => dispatch(actions.addContact({ id, name, number }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);

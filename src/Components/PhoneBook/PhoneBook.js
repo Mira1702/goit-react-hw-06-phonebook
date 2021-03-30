@@ -17,8 +17,9 @@ class PhoneBook extends Component  {
     numberInputId = shortid.generate();
 
     handleChange = event => {
-        this.setState({ [event.currentTarget.name]: event.currentTarget.value });  
-    }    
+        this.setState({ [event.currentTarget.name]: event.currentTarget.value });        
+    }
+    
     
     // handleSubmit = event => {
     //     event.preventDefault();        
@@ -122,13 +123,14 @@ class PhoneBook extends Component  {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.contacts.contacts)
   return {
     contacts: state.contacts.contacts,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: ({ id, name, number  }) => dispatch(actions.addContact({ id, name, number }))
+    onSubmit: ({ name, number  }) => dispatch(actions.addContact( name, number ))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);

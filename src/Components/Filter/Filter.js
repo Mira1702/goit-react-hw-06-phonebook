@@ -17,11 +17,15 @@ const Filter = ({ value, onChange }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (contacts) => {
+  console.log(contacts.contacts.filter)
   return {
-    contacts: state.contacts.contacts,
+    value: contacts.contacts.filter,    
   };
+  
 };
+
+
 
 const mapDispatchToProps = dispatch => ({
   onChange: event => dispatch(actions.filterContact(event.target.value))

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
+import shortid from 'shortid';
 import * as actions from '../../Redux/Contacts/actions';
+
+const nameInputId = shortid.generate();
 
 const Filter = ({ value, onChange }) => {  
   return (
@@ -12,14 +15,16 @@ const Filter = ({ value, onChange }) => {
         name="filter"
         value={value}
         onChange={onChange}
+        id={nameInputId}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({ contacts }) => {
+const mapStateToProps = (state) => {
+  console.log(state.contacts.filter)
   return {
-    value: contacts.contacts.filter,    
+    value: state.contacts.filter,    
   };  
 };
 

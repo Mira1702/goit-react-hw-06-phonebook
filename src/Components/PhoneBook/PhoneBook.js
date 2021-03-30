@@ -20,8 +20,13 @@ class PhoneBook extends Component  {
         this.setState({ [event.currentTarget.name]: event.currentTarget.value });        
     }
     
-    formSubmitHandler = event => {
-        event.preventDefault(); 
+    handleForm = event => {
+        event.preventDefault();
+        const { name } = this.state;
+        const { contacts } = this.props;
+        if (contacts.find(contact => contact.name === name)) {
+            return alert(`${name} is already in contacts.`);
+        }
         this.props.onSubmit({ id: shortid.generate(), ...this.state });
         this.setState({            
             name: '',
@@ -31,7 +36,7 @@ class PhoneBook extends Component  {
 
     render() {        
         return (            
-                <form onSubmit={this.formSubmitHandler} className="form">
+                <form onSubmit={this.handleForm} className="form">
                    <label className={styles.label} htmlFor={this.nameInputId} >Name
                        <input
                         type="text"

@@ -12,7 +12,6 @@ const ContactItem = ({ id, name, number, onRemove }) => {
 };
 
 const Contacts = ({ contacts, onRemove } ) => {  
-  
   return (
     <ul>
       {contacts.map(({ id, name, number }) => (        
